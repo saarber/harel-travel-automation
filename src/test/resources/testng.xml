@@ -1,0 +1,12 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="Harel Travel Policy Suite" verbose="1">
+    <listeners>
+        <listener class-name="com.harel.utils.ScreenshotListener"/>
+    </listeners>
+
+    <test name="E2E Travel Policy Purchase Flow">
+        <classes>
+            <class name="com.harel.tests.TravelPolicyE2ETest"/>
+        </classes>
+    </test>
+</suite>
