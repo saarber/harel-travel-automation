@@ -2,6 +2,7 @@ package com.harel.pages;
 
 import com.harel.utils.DateInputUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -19,7 +20,7 @@ public class TravelDatesPage extends BasePage {
     private final By nextToPassengersBtn = By.xpath("//button[contains(.,'הלאה לפרטי הנוסעים')]");
 
     // Label might be: סה"כ ימים / סה״כ ימים
-    private final By totalDaysLabel = By.xpath("//*[contains(normalize-space(),'סה') and contains(normalize-space(),'ימים')]");
+    private final By totalDaysLabel = By.xpath("//*[contains(text(),'סה') and contains(normalize-space(),'ימים')]");
 
     public TravelDatesPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -34,6 +35,7 @@ public class TravelDatesPage extends BasePage {
     public void setReturnDate(LocalDate date) {
         WebElement input = findReturnInput();
         DateInputUtils.setDate(driver, input, date);
+        input.sendKeys(Keys.TAB);
     }
 
     public int getTotalDays() {
@@ -72,7 +74,7 @@ public class TravelDatesPage extends BasePage {
 
     private WebElement findDepartureInput() {
         // Prefer label-based, then placeholder-based
-        By byLabel = By.xpath("//*[contains(normalize-space(),'תאריך יציאה')]/ancestor::*[self::div or self::label][1]//input");
+        By byLabel = By.xpath("//*[contains(text(),'תאריך יציאה')]/ancestor::*[self::div or self::label][1]//input");
         if (isPresent(byLabel)) {
             return waitVisible(byLabel);
         }
@@ -80,7 +82,7 @@ public class TravelDatesPage extends BasePage {
     }
 
     private WebElement findReturnInput() {
-        By byLabel = By.xpath("//*[contains(normalize-space(),'תאריך חזרה')]/ancestor::*[self::div or self::label][1]//input");
+        By byLabel = By.xpath("//*[contains(text(),'תאריך חזרה')]//ancestor::*[self::div or self::label][1]//input");
         if (isPresent(byLabel)) {
             return waitVisible(byLabel);
         }

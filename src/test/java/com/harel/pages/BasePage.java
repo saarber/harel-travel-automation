@@ -54,7 +54,7 @@ public abstract class BasePage {
      * Click by visible Hebrew text. Useful for dynamic/react UI.
      */
     protected void clickByText(String text) {
-        By locator = By.xpath("//*[contains(normalize-space(), '" + text + "')]");
+        By locator = By.xpath("//div[contains(text(), '" + text + "')]");
         WebElement el = waitVisible(locator);
 
         // If element itself isn't clickable, click a clickable ancestor
